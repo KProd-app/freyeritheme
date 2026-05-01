@@ -26,11 +26,14 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             el.classList.remove('lazyloadt4s');
-            el.classList.add('lazyloadedt4s'); 
+            el.classList.add('lazyloadt4sed'); 
         });
     };
     processKallesLazyLoad();
     document.addEventListener('shopify:section:load', processKallesLazyLoad);
+    document.addEventListener('shopify:block:select', processKallesLazyLoad);
+    document.addEventListener('shopify:block:deselect', processKallesLazyLoad);
+    setInterval(processKallesLazyLoad, 1000); // Catch dynamic editor changes
 });
 </script>
 
