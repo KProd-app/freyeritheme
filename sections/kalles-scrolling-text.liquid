@@ -1,0 +1,182 @@
+﻿<!-- sections/scrolling-text.liquid -->
+{{ 'kalles-section.css' | asset_url | stylesheet_tag }}
+<link href="{{ 'kalles-t4s-animation.css' | asset_url }}" rel="stylesheet" media="print" onload="this.media='all'">
+{%- liquid
+  assign sid = section.id
+  assign se_stts = section.settings
+  assign stt_layout = se_stts.layout
+  assign stt_image_bg = se_stts.image_bg
+ -%} 
+ <div class="t4s-section-inner t4s_nt_se_{{ sid }} t4s_se_{{ sid }} {{ stt_layout }}{% if stt_image_bg != blank and stt_layout != 't4s-se-container' %} t4s-has-imgbg lazyloadt4s{% endif %}" {% if stt_image_bg != blank and stt_layout != 't4s-se-container' %} data-bgset="{{ stt_image_bg | image_url: width: 1 }}" data-sizes="auto"  data-optimumx="2"{% endif %} {% render 'kalles-section_style', se_stts: se_stts -%} >
+  {{ 'kalles-t4s-scrolling-text.css' | asset_url | stylesheet_tag }}
+  <div class="t4s-scrolling-text__wrap t4s-scrolling-text--marquee t4s-col t4s-col-item t4s-d-flex t4s-align-items-center t4s-oh" style="--text-color:{{ section.settings.cl }}">
+    <div class="t4s-marquee t4s-marquee--{{ section.settings.direction }} t4s-marquee--pause{{ section.settings.pause_when_hover }}" style="--marquee-delay: {{ section.settings.speed }}s;">
+      <div class="t4s-marquee__item">
+        {%- for block in section.blocks -%}
+          {%- assign bk_stts = block.settings -%}
+          <div class="t4s-scrolling-text__item t4s-d-inline-block t4s-pr t4s-oh t4s-rte{% unless section.settings.adding_border %}--list{% endunless %}">
+            <div class="t4s-scrolling-text--marquee-content t4s-d-flex t4s-align-items-center">
+              <div class="t4s-scrolling-text--icon"><span></span></div>
+              <div class="t4s-scrolling-text--text"> {{- bk_stts.content | replace: "[", "<span class='t4s-scrolling-text--highlight'>" | replace: "]", "</span>"-}} </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+{%- schema -%}
+{
+  "name": "Scrolling text",
+  "tag": "section",
+  "class": "t4s-section t4s-section-all t4s-srolling-text t4s_tp_marquee",
+  "settings": [
+    {
+      "type": "header",
+      "content": "1. General options"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 0.5,
+      "max": 50,
+      "step": 0.5,
+      "unit": "s",
+      "default": 15,
+      "label": "Speed"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "default": "rtl",
+      "label": "Direction",
+      "options": [
+        {
+          "value": "rtl",
+          "label": "Right to left"
+        },
+        {
+          "value": "ltr",
+          "label": "Left to right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_when_hover",
+      "default": false,
+      "label": "Pause when hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "adding_border",
+      "label": "Adding a bottom border on link",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "cl",
+      "label": "Text color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "3. Design options"
+    },
+    {
+      "type": "color",
+      "id": "cl_bg",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "cl_bg_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_bg",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "mg",
+      "label": "Margin",
+      "info": "Margin top, margin right, margin bottom, margin left. If you not use to blank",
+      "default": ",,50px,",
+      "placeholder": ",,50px,"
+    },
+    {
+      "type": "text",
+      "id": "pd",
+      "label": "Padding",
+      "info": "Padding top, padding right, padding bottom, padding left. If you not use to blank",
+      "placeholder": "50px,,50px,"
+    },
+    {
+      "type": "header",
+      "content": "+ Design Tablet Options"
+    },
+    {
+      "type": "text",
+      "id": "mg_tb",
+      "label": "Margin",
+      "default": ",,50px,",
+      "placeholder": ",,50px,"
+    },
+    {
+      "type": "text",
+      "id": "pd_tb",
+      "label": "Padding",
+      "placeholder": ",,50px,"
+    },
+    {
+      "type": "header",
+      "content": "+ Design mobile options"
+    },
+    {
+      "type": "text",
+      "id": "mg_mb",
+      "label": "Margin",
+      "default": ",,30px,",
+      "placeholder": ",,50px,"
+    },
+    {
+      "type": "text",
+      "id": "pd_mb",
+      "label": "Padding",
+      "placeholder": ",,50px,"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Welcome to our store</p>",
+          "info": "tIf you want to highlight text, please add '[]' tag in the text. Ex: [Kalles]"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling text",
+      "settings": {
+        "pd":"20px,,20px,",
+        "cl_bg":"#56CFE1"
+      },
+      "category": "Homepage",
+      "blocks": [
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

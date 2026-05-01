@@ -1,0 +1,7 @@
+<div class="t4s-product-img t4s_ratio" {{ imgatt }}style="--aspect-ratioapt: {{ video.aspect_ratio | default: 1 }}">
+  {{ video | video_tag: autoplay: true, loop: true, muted: true, controls: false, class: 't4s-product-main-img t4s-pe-none', preload: 'auto' }}
+  <span class="lazyloadt4s-loader"></span>
+  <img data-pr-img class="t4s-product-main-img lazyloadt4s " loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-widths="[100,200,330,400,500,600,700,800,900]" data-optimumx="2" data-sizes="auto" width="{{ video.preview_image.width }}" height="{{ video.preview_image.height }}" alt="{{ video.preview_image.alt | escape }}">
+  <div data-replace-img2></div>
+  <noscript>{{ video | video_tag: autoplay: true, loop: true, muted: true, controls: false, class: 't4s-product-main-img t4s-pe-none' }}</noscript>
+</div>

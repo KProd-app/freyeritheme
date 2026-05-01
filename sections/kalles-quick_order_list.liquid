@@ -1,0 +1,148 @@
+﻿{% liquid
+  unless product.available
+    continue
+  endunless
+%}
+{{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
+{%-liquid
+  assign items_in_cart = cart | line_items_for: product | sum: 'quantity'
+  if settings.currency_code_enabled
+      assign total_variant_in_cart = cart | line_items_for: product | sum: 'original_line_price' | money_with_currency
+    else
+      assign total_variant_in_cart = cart | line_items_for: product | sum: 'original_line_price' | money
+    endif
+-%}
+<div class="t4s-container" data-replace-content>
+  <div class="t4s-row">
+    <div class="t4s-col-item t4s-col-12">
+      <quick-order-list id="{{ section.id }}-{{ product.id }}" class="t4s-product" data-section="{{ section.id }}" data-product-id="{{ product.id }}" data-url="{{ product.url }}" aria-busy="false">
+        <form action="{{ routes.cart_update_url }}" method="POST" id="QuickOrderList">
+          <div class="t4s-quick-order-list-content">
+            <div class="t4s-qol-head">
+            <div class="t4s-qol-head-item">
+              {%- if product.has_only_default_variant -%}
+                  <p>Product</p>           
+              {%- else -%}
+                  <p>Variant</p>
+              {%- endif -%}
+              </div>
+                <div class="t4s-qol-head-item">
+                  <p>Quantity</p>
+                </div>
+                <div class="t4s-qol-head-item">
+                  <p>Price</p>
+                </div>
+            <div class="t4s-qol-head-item">
+              {%- if product.has_only_default_variant -%}
+                  <p>Product subtotal</p>
+              {%- else -%}         
+                  <p>Variant subtotal</p>   
+              {%- endif -%}
+            </div>
+            </div>
+            <table class="t4s-quick-order-list__table">
+              
+              <tbody>
+                {%- if product.has_only_default_variant -%}
+                  {%- render 'quick-order-list-row',
+                    item: product,
+                    image: product.featured_media,
+                    sku: product.selected_or_first_available_variant.sku,
+                    variant: product.selected_or_first_available_variant,
+                    show_image: section.settings.show_image,
+                    product: product
+                  -%}
+                {%- else -%}
+                  {%- for variant in product.variants -%}
+                    {%- render 'quick-order-list-row',
+                      item: variant,
+                      image: variant.image,
+                      sku: variant.sku,
+                      variant: variant,
+                      show_image: section.settings.show_image,
+                      product: product
+                    -%}
+                  {%- endfor -%}
+                {%- endif -%}
+                <tr class="t4s-quick-order-list__total" id="t4s-quick-order-list-total-{{ product.id }}-{{ section.id }}">
+                  <td class="t4s-quick-order-item__total">
+                    {%- if items_in_cart > 0 -%}
+                      <div class=t4s-quick-order-list__total-actions>
+                        <div class="t4s-quick-order-list__total-actions-item t4s-d-flex t4s-justify-content-center">
+                          <a href="{{ routes.cart_url }}">View cart</a>
+                        </div>
+
+                        <quick-order-list-remove-all-button>
+                          <button class="button" type="button">
+                            <span class="">Remove all</span>
+                          </button>
+                        </quick-order-list-remove-all-button>
+                      </div>
+                    {%- endif -%}
+                  </td>
+
+                  <td class="t4s-quick-order-item__total">
+                    <div class="t4s-flex t4s-flex-col t4s-text-start">
+                      <span>{{ items_in_cart }}</span>
+                      <span>Total items </span>
+                    </div>
+                  </td>
+
+                  <td></td>
+
+                  <td class="t4s-quick-order-item__total">
+                    <div class="t4s-d-block t4s-text-end">
+                      <p>{{ total_variant_in_cart }}</p>
+                      <p class="t4s-total"><span>{{ items_in_cart }}</span> Total items</p>
+                      <p>Product subtotal</p>
+                      <div>
+                        {%- assign page_url = settings.link_ship -%}
+                        {%- if cart.taxes_included and page_url != blank -%}
+                          {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: page_url }}
+                        {%- elsif cart.taxes_included -%}
+                          {{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}
+                        {%- elsif page_url != blank -%}
+                          {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: page_url }}
+                        {%- else -%}
+                          {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      
+      </quick-order-list>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.QuickOrderListID = {{ section.id | json }} 
+</script>
+{% schema %}
+  {
+    "name": "[Kalles] Quick order list",
+    "limit": 1,
+    "enabled_on": {
+      "templates": ["product"]
+    },
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_image",
+        "label": "Show image",
+        "default": false
+      }
+    ],
+    "presets": [
+      {
+        "name": "Quick order list"
+      }
+    ]
+  }
+{% endschema %}

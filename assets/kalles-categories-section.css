@@ -1,0 +1,49 @@
+/* --- MOBILE --- */
+.t4s-collection-item-image {
+    border-radius: 50%;
+    object-fit: cover;
+    width: var(--item-size-mobile);
+    aspect-ratio: 1/1;
+}
+
+.t4s-view-all {
+    border: 1px solid black;
+}
+
+.t4s-categories-inner {
+    width: calc(100% / var(--item-width-mobile)) !important;
+}
+
+.t4s-view-all-container {
+    width: calc(100% / var(--item-width-mobile)) !important;
+}
+
+.t4s-collection-item-image {
+    width: var(--item-size-mobile);
+}
+
+/* --- TABLET --- */
+@media (min-width: 768px) {
+    .t4s-categories-inner {
+        width: calc(100% / var(--item-width-tablet)) !important;
+    }
+    .t4s-view-all-container {
+        width: calc(100% / var(--item-width-tablet)) !important;
+    }
+    .t4s-collection-item-image {
+        width: var(--item-size-tablet);
+    }
+}
+
+/* --- DESKTOP --- */
+@media (min-width: 1025px) {
+    .t4s-categories-inner {
+        width: calc(100% / var(--item-width)) !important;
+    }
+    .t4s-view-all-container {
+        width: calc(100% / var(--item-width)) !important;
+    }
+    .t4s-collection-item-image {
+        width: var(--item-size);
+    }
+}

@@ -1,0 +1,249 @@
+{% doc %}
+  @prompt
+    picture section
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-picture-section-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-picture-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 {{ block.settings.horizontal_padding }}px;
+  }
+
+  .ai-picture-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  {% if block.settings.link != blank %}
+    .ai-picture-link-{{ ai_gen_id }} {
+      display: block;
+      width: 100%;
+      cursor: pointer;
+    }
+  {% endif %}
+
+  .ai-picture-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: {{ block.settings.image_fit }};
+    {% if block.settings.custom_height %}
+      height: {{ block.settings.height }}px;
+    {% endif %}
+  }
+
+  .ai-picture-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    {% if block.settings.custom_height %}
+      height: {{ block.settings.height }}px;
+    {% else %}
+      min-height: 400px;
+    {% endif %}
+  }
+
+  .ai-picture-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .ai-picture-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-picture-section-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding_top | times: 0.7 }}px 0 {{ block.settings.padding_bottom | times: 0.7 }}px;
+    }
+
+    .ai-picture-container-{{ ai_gen_id }} {
+      padding: 0 {{ block.settings.horizontal_padding | times: 0.7 }}px;
+    }
+
+    {% if block.settings.custom_height %}
+      .ai-picture-image-{{ ai_gen_id }},
+      .ai-picture-placeholder-{{ ai_gen_id }} {
+        height: {{ block.settings.height | times: 0.7 }}px;
+      }
+    {% endif %}
+  }
+{% endstyle %}
+
+<picture-section-{{ ai_gen_id }} class="ai-picture-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-picture-container-{{ ai_gen_id }}">
+    <div class="ai-picture-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.image %}
+        {% if block.settings.link != blank %}
+          <a href="{{ block.settings.link }}" class="ai-picture-link-{{ ai_gen_id }}">
+            <img
+              src="{{ block.settings.image | image_url: width: 2000 }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              class="ai-picture-image-{{ ai_gen_id }}"
+            >
+          </a>
+        {% else %}
+          <img
+            src="{{ block.settings.image | image_url: width: 2000 }}"
+            alt="{{ block.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            class="ai-picture-image-{{ ai_gen_id }}"
+          >
+        {% endif %}
+      {% else %}
+        <div class="ai-picture-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-picture-empty-state-{{ ai_gen_id }}">
+            Add an image to get started
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</picture-section-{{ ai_gen_id }}>
+
+{% schema %}
+{
+  "name": "Picture section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_height",
+      "label": "Enable custom height",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Height",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 600,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Picture section"
+    }
+  ]
+}
+{% endschema %}

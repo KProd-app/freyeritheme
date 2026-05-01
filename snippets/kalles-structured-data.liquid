@@ -1,0 +1,126 @@
+{%- capture grich -%}
+{%- assign position = 1 %}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": "{{ 'general.breadcrumb.home' | t }}",
+      "item": "{{ shop.url }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- if template.name == 'product' -%}
+    {%- if product.collections.size > 0 -%},{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ collection.title | default: product.collections.first.title | json }},
+      "item": "{{ shop.url }}{{ collection.url | default: product.collections.first.url }}"
+      {%- assign position = position | plus: 1 -%}
+    }{%- endif -%},{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ product.title | json }},
+      "item": "{{ shop.url }}{{ product.url | within: collection }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- elsif template.name == 'list-collections' -%},{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": "Collections",
+      "item": "{{ shop.url }}/collections"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- elsif template.name == 'collection' and collection.handle -%},{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ collection.title | json }},
+      "item": "{{ shop.url }}{{ collection.url }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- if current_tags -%}
+    {%- for tag in current_tags -%},{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ tag | json }},
+      "item": "{{ shop.url }}{{ collection.url }}/{{ tag | handle }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- endfor -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": "{{ page_title }}{%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tag' | t: tags: meta_tags -}}{%- endif -%}",
+      "item": "{{ canonical_url }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- endif -%}
+    {%- elsif template.name == 'article' -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ blog.title | json }},
+      "item": "{{ shop.url }}{{ blog.url }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ article.title | json }},
+      "item": "{{ shop.url }}{{ article.url }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- elsif template.name == 'blog' -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ blog.title | json }},
+      "item": "{{ shop.url }}{{ blog.url }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- elsif template contains 'customers' -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": "{{ 'customer.account.title' | t }}",
+      "item": "{{ shop.url }}{{ page.url }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- else -%}
+    {%- unless template.name == 'index' -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ page.title | json }},
+      "item": "{{ shop.url }}{{ page.url }}"
+      {%- assign position = position | plus: 1 -%}
+    }
+    {%- endunless -%}
+    {%- endif -%}
+    ]
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+{%- assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" -%}
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {{ potential_action_target | json }},
+      "query-input": "required name=search_term_string"
+    },
+    "url": {{ shop.url | append: page.url | json }}
+  }
+</script>
+{%- elsif request.page_type == 'product' -%}
+<script type="application/ld+json">{{ product | structured_data }}</script>
+{%- elsif request.page_type == 'article' -%}
+<script type="application/ld+json">{{ article | structured_data }}</script>
+{%- endif -%}
+{%- endcapture -%}
+{{- grich | strip_newlines | remove: '  ' -}}

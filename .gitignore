@@ -1,0 +1,19 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Migration Scripts
+copy_kalles.ps1
+rename_kalles.ps1
+
+# Shopify CLI
+.shopify-cli.yml
+.shopify/
+
+# Node.js (just in case)
+node_modules/
+
+# IDEs
+.vscode/
+.idea/
