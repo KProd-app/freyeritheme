@@ -55,59 +55,6 @@
       "name": "Collection picture",
       "settings": {}
     },
-    "image_banner_NFnyLQ": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_FTW4Ym": {
-          "type": "heading",
-          "settings": {
-            "heading": "",
-            "heading_size": "h1"
-          }
-        },
-        "text_CyTzRp": {
-          "type": "text",
-          "settings": {
-            "text": "",
-            "text_style": "body"
-          }
-        },
-        "buttons_wYGtCU": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "CHOOSE YOUR STYLE",
-            "button_link_1": "shopify://collections/just-diffuser",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_FTW4Ym",
-        "text_CyTzRp",
-        "buttons_wYGtCU"
-      ],
-      "custom_css": [
-        "@media screen and (max-width: 750px) {.banner, slideshow-component {display: none; }}"
-      ],
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/Car_Fresheners_Redefined_1.png",
-        "image_2": "shopify://shop_images/IMG_6843.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
-    },
     "image_banner_K7p6XX": {
       "type": "image-banner",
       "blocks": {
@@ -716,7 +663,6 @@
     "1767018440fa0479b5",
     "blocks_htLKHy",
     "blocks_kKQ8xP",
-    "image_banner_NFnyLQ",
     "image_banner_K7p6XX",
     "custom_liquid_hWz8ng",
     "collection_list_yJedqb",
