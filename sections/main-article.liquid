@@ -1,4 +1,4 @@
-﻿{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 
 <article class="article-template">
   {%- for block in section.blocks -%}
@@ -126,7 +126,7 @@
                   </footer>
                 </article>
               {%- endfor -%}
-              {% render 'kalles-pagination', paginate: paginate, anchor: anchorId %}
+              {% render 'pagination', paginate: paginate, anchor: anchorId %}
             </div>
           {% endpaginate %}
         {%- endif -%}

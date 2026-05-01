@@ -1,4 +1,4 @@
-.page-head:before {
+﻿.page-head:before {
     content: '';
     position: absolute;
     background-color: var(--bg-cl);

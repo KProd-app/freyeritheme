@@ -1,4 +1,4 @@
-﻿{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-search.css' | asset_url | stylesheet_tag }}
@@ -216,7 +216,7 @@
               id="main-search-filters"
               data-id="{{ section.id }}"
             >
-              {% render 'kalles-facets',
+              {% render 'facets',
                 results: search,
                 enable_filtering: section.settings.enable_filtering,
                 enable_sorting: section.settings.enable_sorting,
@@ -320,7 +320,7 @@
                 {%- endfor -%}
               </ul>
               {%- if paginate.pages > 1 -%}
-                {% render 'kalles-pagination', paginate: paginate %}
+                {% render 'pagination', paginate: paginate %}
               {%- endif -%}
             </div>
           {%- endif -%}

@@ -1,4 +1,4 @@
-.t4s-newsletter .t4s-section-inner::before {
+﻿.t4s-newsletter .t4s-section-inner::before {
     background-color: var(--news-overlay);
     position: absolute;
     top: 0;

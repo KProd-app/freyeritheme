@@ -9,7 +9,7 @@
   {%- when '4' -%}
     <div class="loox-rating t4s-grid-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
   {%- when '5' -%}
-    {%- capture the_snippet_review_avg %}{% render 'ssw-widget-avg-rate-listing', product: product %}{% endcapture -%}
+    {%- capture the_snippet_review_avg %}{% render 'kalles-ssw-widget-avg-rate-listing', product: product %}{% endcapture -%}
     {%- unless the_snippet_review_avg contains 'Liquid error' -%}{{ the_snippet_review_avg }}{%- endunless -%}
   {%- when '7' -%}
     <!-- Start of Judge.me code --> 

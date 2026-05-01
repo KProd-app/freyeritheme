@@ -1,4 +1,4 @@
-﻿{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
 
 <div class="page-width">
@@ -44,7 +44,7 @@
         </li>
       {%- endfor -%}
     </ul>
-    {% render 'kalles-pagination', paginate: paginate %}
+    {% render 'pagination', paginate: paginate %}
   {%- endpaginate -%}
 </div>
 {% schema %}

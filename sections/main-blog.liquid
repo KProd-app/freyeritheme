@@ -1,4 +1,4 @@
-﻿{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
 
@@ -45,7 +45,7 @@
     </div>
 
     {%- if paginate.pages > 1 -%}
-      {%- render 'kalles-pagination', paginate: paginate -%}
+      {%- render 'pagination', paginate: paginate -%}
     {%- endif -%}
   </div>
 {%- endpaginate -%}

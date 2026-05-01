@@ -1,4 +1,4 @@
-﻿{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
@@ -107,7 +107,7 @@
           id="main-collection-filters"
           data-id="{{ section.id }}"
         >
-          {% render 'kalles-facets',
+          {% render 'facets',
             results: collection,
             enable_filtering: section.settings.enable_filtering,
             enable_sorting: section.settings.enable_sorting,
@@ -183,7 +183,7 @@
             </ul>
 
             {%- if paginate.pages > 1 -%}
-              {% render 'kalles-pagination', paginate: paginate, anchor: '' %}
+              {% render 'pagination', paginate: paginate, anchor: '' %}
             {%- endif -%}
           </div>
         {%- endif -%}

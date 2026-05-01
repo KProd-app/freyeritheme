@@ -292,9 +292,9 @@
     {%- endif -%}
 
 
-    {% render 'kalles-integration' %}
-    {% include 'pagefly-app-header' %}
-  </head>
+  {% include 'pagefly-app-header' %}
+  {% render 'kalles-integration' %}
+</head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">

@@ -2,7 +2,8 @@
 Theme Name: Core The4
 Author: The4
 */
-/* html, body, div, span, applet, object, iframe,
+/*
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -154,7 +155,6 @@ input[type="submit"]:not(.t4s-btn) {
     -webkit-appearance: none;
     transition: color .3s ease, background-color .3s ease, border-color .3s ease, box-shadow .3s ease, opacity .3s ease;
  }
-/* input:not([type=submit]):not([type=checkbox]), select, textarea */
 input, select, textarea {
     font-size: 13px;
     outline: 0;
@@ -194,7 +194,6 @@ a {
   color: #333333;
   text-decoration: none;
     transition: all .25s ease; }
-  /* a:hover, a:focus, a:active { */
   a:hover, a:active {
     outline: none;
     text-decoration: none; }
@@ -202,10 +201,6 @@ a {
     color: #242424; }
   h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, .t4s_title a { 
     font-family: inherit; }
-
-/*   h1 a:not(:hover), h2 a:not(:hover), h3 a:not(:hover), h4 a:not(:hover), h5 a:not(:hover), h6 a:not(:hover), .t4s_title a:not(:hover) {
-      color: inherit; 
-  } */
 
 big {
   font-size: larger; }
@@ -302,7 +297,7 @@ img {
   height: auto;
   border: 0;
   vertical-align: middle; }
-*/ 
+
 .t4s-clearfix:after,.t4s-clearfix:before {
     content: ' ';
     display: table
@@ -418,11 +413,7 @@ ol, ul {
     outline: 0.2rem solid rgba(var(--text-color-rgb),.5);
     outline-offset: 0.3rem;
     box-shadow: none;
-    /* box-shadow: 0 0 0 0.3rem rgb(var(--text-color-rgb)),0 0 0.5rem 0.4rem rgba(var(--text-color-rgb),.3); */
 }
-/* ::selection {
-  background-color: rgba(var(--color-foreground), 0.2);
-} */
 
 .t4s_field__input:focus-visible, input:not([type=submit]):not([type=checkbox]):focus-visible, select:focus-visible, textarea:focus-visible {
     box-shadow: none;
@@ -478,6 +469,7 @@ blockquote:after, q:after {
 em {
     font-family: var(--font-family-3) !important;
 }
+*/
 /*
  * Bootstrap Grid v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

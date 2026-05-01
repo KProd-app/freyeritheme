@@ -1,126 +1,21 @@
-﻿{% comment %} 
-  KALLES INTEGRATION SNIPPET
-  This snippet safely loads necessary CSS variables, scripts, and stylesheets 
-  from the Kalles theme to ensure Kalles sections work in the Freyeri theme.
-{% endcomment %}
+{%- comment -%} Kalles Integration Assets {%- endcomment -%}
 
-<style>
-  :root {
-      --wrapper-mw: 1200px;
-      --t4s-success-color: #428445;
-      --t4s-warning-color: #e0b252;
-      --t4s-error-color: #EB001B;
-      --t4s-light-color: #ffffff;
-      --t4s-dark-color: #222222;
-      --t4s-highlight-color: #ec0101;
-      --t4s-tooltip-background: #000;
-      --t4s-tooltip-color: #fff;
-      --primary-sw-color: #000;
-      --border-sw-color: #ddd;
-      --secondary-sw-color: #fff;
-      --primary-price-color: #ec0101;
-      --secondary-price-color: #878787;
-      --t4s-body-background: #ffffff;
-      --text-color: #878787;
-      --heading-color: #222222;
-      --accent-color: #56cfe1;
-      --secondary-color: #222222;
-      --link-color: #878787;
-      --link-color-hover: #56cfe1;
-      --border-color: #e5e5e5;
-      --border-primary-color: #222222;
-      --button-background: #222222;
-      --button-color: #ffffff;
-      --button-background-hover: #56cfe1;
-      --button-color-hover: #ffffff;
-      --sale-badge-background: #56cfe1;
-      --sale-badge-color: #ffffff;
-      --new-badge-background: #008ee2;
-      --new-badge-color: #ffffff;
-  }
-</style>
-
-{%- comment -%} 
-  We load the kalles-theme.css asynchronously to prevent blocking render,
-  and avoid kalles-base.css to prevent global CSS resets from breaking Freyeri.
-{%- endcomment -%}
 <link rel="stylesheet" href="{{ 'kalles-base.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'kalles-theme.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- if settings.kalles_custom_css != blank -%}
-  <link rel="stylesheet" href="{{ 'kalles-custom.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- endif -%}
+<noscript><link rel="stylesheet" href="{{ 'kalles-base.css' | asset_url }}"></noscript>
+<noscript><link rel="stylesheet" href="{{ 'kalles-theme.css' | asset_url }}"></noscript>
 
 <script>
-  window.T4Srequest = {
-    design_mode: {{ request.design_mode | default: false }},
-    page_type: '{{ request.page_type }}',
-    path: {{ request.path | json }}
-  };
-  window.T4Sroutes = {
-    root_url: '{{ routes.root_url }}',
-    search_url: '{{ routes.search_url }}',
-    predictive_search_url: '{{ routes.predictive_search_url }}',
-    all_url: '{{ routes.all_products_collection_url }}',
-    cart_url: '{{ routes.cart_url }}',
-    cart_add_url: '{{ routes.cart_add_url }}',
-    cart_change_url: '{{ routes.cart_change_url }}',
-    cart_update_url: '{{ routes.cart_update_url }}'
-  };
-  window.T4sFunc = {
-    psjson_lib: new Array
-  };
-  window.T4SProductStrings = {};
-  window.T4Sstrings = {};
   window.T4Sconfigs = {
-    theme: 'kalles',
-    moneyFormat: {{ shop.money_format | json }},
-    moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }},
-    script1: '{{ 'kalles-polyfill.min.js' | asset_url }}',
-    script2: '{{ 'kalles-theme.min.js' | asset_url }}',
-    script3: '{{ 'kalles-interactable.min.js' | asset_url }}',
-    script5: '{{ 'kalles-t4s_zoom.min.js' | asset_url }}',
-    script6: '{{ 'kalles-predictive-search.min.js' | asset_url }}',
-    script7: '{{ 'kalles-facets.min.js' | asset_url }}',
-    script8: '{{ 'kalles-nouislider.min.js' | asset_url }}',
-    script9: '{{ 'des_adm.min.js' | asset_url }}',
-    script10: '{{ 'kalles-t4s-instant-page.min.js' | asset_url }}',
-    script11: 'none',
-    script12: '{{ 'kalles-reviewOther.js' | asset_url }}',
-    script12a: '{{ 'kalles-t4s-currencies.min.js' | asset_url }}',
-    script12b: '{{ 'kalles-threesixty.min.js' | asset_url }}',
-    stylesheet1: '{{ 'kalles-mini-cart.css' | asset_url }}',
-    stylesheet2: '{{ 'kalles-mobile_nav.css' | asset_url }}',
-    stylesheet3: '{{ 'kalles-login-sidebar.css' | asset_url }}',
-    stylesheet4: '{{ 'kalles-search-hidden.css' | asset_url }}'
+    is_rtl: false,
+    money_format: {{ shop.money_format | json }},
+    settings: {
+      enable_lazyload: true,
+      time_slider: 5000,
+      product_grid_ratio: "1",
+      product_grid_crop: "center"
+    }
   };
 </script>
 
 <script src="{{ 'kalles-global.min.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'kalles-theme.min.js' | asset_url }}" defer="defer"></script>
-
-<svg aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" style="display:none;"><defs>
-  <symbol id="t4s-icon-btn" viewBox="0 0 14 10" fill="none">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor"></path>
-  </symbol>
-  <symbol id="t4s-icon-loading" viewBox="0 0 100 100" fill="none">
-    <path xmlns="http://www.w3.org/2000/svg" fill="none" d="M24.3,30C11.4,30,5,43.3,5,50s6.4,20,19.3,20c19.3,0,32.1-40,51.4-40 C88.6,30,95,43.3,95,50s-6.4,20-19.3,20C56.4,70,43.6,30,24.3,30z" stroke="currentColor" stroke-width="2" stroke-dasharray="205.271142578125 51.317785644531256"><animate attributeName="stroke-dashoffset" calcMode="linear" values="0;256.58892822265625" keyTimes="0;1" dur="1" begin="0s" repeatCount="indefinite"/></path>
-  </symbol>
-  <symbol id="t4s-icon-search" viewBox="0 0 18 19" fill="none">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"></path>
-  </symbol>
-  <symbol id="t4s-icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
-    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor"></path>
-  </symbol>
-  <symbol id="t4s-icon-atc">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-  </symbol>
-  <symbol id="t4s-icon-qv">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-  </symbol>
-  <symbol id="t4s-icon-cp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
-  </symbol>
-  <symbol id="t4s-icon-wis">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-  </symbol>
-</defs></svg>

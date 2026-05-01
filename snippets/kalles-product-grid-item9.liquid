@@ -106,7 +106,7 @@ endif -%}
       <div data-product-badge data-sort="sale,new,soldout,preOrder,custom" class="t4s-product-badge"></div>
       <div class="t4s-product-btns2">
          {%- if isGrowaveWishlist -%}
-            {%- capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with pid %}{% endcapture -%}
+            {%- capture the_snippet_fave_icon %}{% render 'kalles-ssw-widget-faveicon' with pid %}{% endcapture -%}
             {%- unless the_snippet_fave_icon contains 'Liquid error' -%}<div class="t4s-pr-wishlist">{{ the_snippet_fave_icon }}</div>{%- endunless -%}
          {%- else -%}<div data-replace-wishlist data-tooltip="right"></div>
          {%- endif -%}

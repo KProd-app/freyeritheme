@@ -1,4 +1,4 @@
-﻿{% comment %}
+{% comment %}
   Renders a swatch input component.
   Accepts:
   - id: {String} unique input id
@@ -47,6 +47,6 @@
   title="{{ value }}"
   class="swatch-input__label{% if shape == 'square' %} swatch-input__label--square{% endif %}"
 >
-  {% render 'kalles-swatch', swatch: swatch, shape: shape %}
+  {% render 'swatch', swatch: swatch, shape: shape %}
   {{ help_text }}
 </label>
