@@ -1,4 +1,4 @@
-﻿.t4s-top-heading {
+.t4s-top-heading {
     margin-bottom: var(--tophead_mb);
     margin-top: var(--tophead_mt);
 }
@@ -7,6 +7,7 @@
     position: relative;
     color: var(--color);
     --cl-heading:  var(--color);
+    margin: 0;
 }
 .t4s-section-title > span {
     display: inline-block;
