@@ -1,4 +1,4 @@
-﻿<!-- sections/instagram-shop.liquid -->
+<!-- sections/instagram-shop.liquid -->
 {{ 'kalles-section.css' | asset_url | stylesheet_tag }}
 {{ 'kalles-pre_flickityt4s.min.css' | asset_url | stylesheet_tag }}
 {{ 'kalles-instagram-pin.css' | asset_url | stylesheet_tag }}
@@ -61,9 +61,9 @@
             <div class="t4s-col-item t4s-ins-item" id="b_{{ block.id }}" data-select-flickity {{ block.shopify_attributes }}>    
                 <div class="t4s-ins-wrap t4s-pr t4s-oh" timeline hdt-reveal="slide-in">         
                     <{{ ARRhtml[0] }} {{ ARRhtml[1] }}href="{{ url }}" {{ ARRhtml[2] }}target="_blank"> 
-                        <div class="t4s_ratio" {{ bk_stts.url }} style="background: url({{ image | image_url: width: 1 }});--aspect-ratioapt: {{ image.aspect_ratio | default: 1.7776 }}; --br-rdu: {{ se_stts.image_bdr }}%;">
+                        <div class="t4s_ratio" {{ bk_stts.url }} style="--aspect-ratioapt: {{ image.aspect_ratio | default: 1.7776 }}; --br-rdu: {{ se_stts.image_bdr }}%;">
                             {%- if image != blank -%}
-                                <img {% if image.presentation.focal_point != '50.0% 50.0%' %}style="object-position: {{ image.presentation.focal_point }}"{% endif %} class="lazyloadt4s t4s-lz--fadeIn" data-src="{{ image | image_url: width: 1 }}" data-widths="[100,200,400,600,700,800,900,1000,1200,1400,1600]" data-optimumx="2" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape }}">
+                                <img {% if image.presentation.focal_point != '50.0% 50.0%' %}style="object-position: {{ image.presentation.focal_point }}"{% endif %} class="t4s-lz--fadeIn" loading="lazy" src="{{ image | image_url: width: 800 }}" srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1200 }} 1200w" sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" width="{{ image.width }}" height="{{ image.height }}" alt="{{ image.alt | escape }}">
                             {%- else -%}
                                 {{ 'image' | placeholder_svg_tag: 't4s-placeholder-svg' }} 
                             {%- endif -%} 

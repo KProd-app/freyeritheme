@@ -1,10 +1,38 @@
 {%- comment -%} Kalles Integration Assets {%- endcomment -%}
 
-{{ 'kalles-base.css' | asset_url | stylesheet_tag }}
-{{ 'kalles-theme.css' | asset_url | stylesheet_tag }}
+<!-- Kalles Integration Styles -->
+<link rel="stylesheet" href="{{ 'kalles-theme.css' | asset_url }}">
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-<noscript><link rel="stylesheet" href="{{ 'kalles-base.css' | asset_url }}"></noscript>
-<noscript><link rel="stylesheet" href="{{ 'kalles-theme.css' | asset_url }}"></noscript>
+{{ 'kalles-base.css' | asset_url | stylesheet_tag }}
+
+<!-- Kalles Lazyload Polyfill for Freyeri -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const processKallesLazyLoad = () => {
+        document.querySelectorAll('.lazyloadt4s, .t4s-has-imgbg').forEach(function(el) {
+            if (el.tagName === 'IMG' && el.dataset.src) {
+                // Replace width=1 with a reasonable size for native loading
+                let newSrc = el.dataset.src.replace('width=1', 'width=800');
+                el.src = newSrc;
+                el.setAttribute('loading', 'lazy');
+            } else if (el.dataset.bgset) {
+                let newBg = el.dataset.bgset.replace('width=1', 'width=800');
+                el.style.backgroundImage = 'url(' + newBg + ')';
+            }
+            
+            // Fix inline backgrounds that were set to width=1
+            if (el.style.backgroundImage && el.style.backgroundImage.includes('width=1')) {
+                el.style.backgroundImage = el.style.backgroundImage.replace('width=1', 'width=800');
+            }
+
+            el.classList.remove('lazyloadt4s');
+            el.classList.add('lazyloadedt4s'); 
+        });
+    };
+    processKallesLazyLoad();
+    document.addEventListener('shopify:section:load', processKallesLazyLoad);
+});
+</script>
 
 <script>
   window.T4Sconfigs = {
