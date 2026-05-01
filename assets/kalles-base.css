@@ -491,7 +491,7 @@ em {
   margin-inline-start: auto;
 }
 
-/* @media (min-width: 576px) {
+@media (min-width: 576px) {
   .t4s-container-sm, .t4s-container {
     max-width: 540px;
   }
@@ -505,7 +505,7 @@ em {
   .t4s-container-lg, .t4s-container-md, .t4s-container-sm, .t4s-container {
     max-width: 960px;
   }
-} */
+}
 @media (min-width: 1200px) {
   .t4s-container-xl, .t4s-container-lg, .t4s-container-md, .t4s-container-sm, .t4s-container {
     max-width: 1170px;
