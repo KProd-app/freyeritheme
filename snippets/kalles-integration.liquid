@@ -50,4 +50,32 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 </script>
 
-<script src="{{ 'kalles-global.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer="defer"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const initFlickity = () => {
+        if (typeof Flickity !== 'undefined') {
+            document.querySelectorAll('.flickityt4s:not(.flickity-enabled)').forEach(function(el) {
+                try {
+                    let optionsStr = el.getAttribute('data-flickityt4s-js') || '{}';
+                    let options = JSON.parse(optionsStr);
+                    // Convert custom kalles options to standard if needed
+                    options.lazyLoad = false; // Handled by our image polyfill
+                    if (options.wrapAround === undefined) options.wrapAround = true;
+                    if (options.pageDots === undefined) options.pageDots = true;
+                    
+                    new Flickity(el, options);
+                } catch(e) {
+                    console.error('Error initializing Flickity for Kalles section:', e);
+                }
+            });
+        }
+    };
+    
+    // Init after a short delay to ensure Flickity is loaded
+    setTimeout(initFlickity, 500);
+    document.addEventListener('shopify:section:load', () => setTimeout(initFlickity, 200));
+    document.addEventListener('shopify:block:select', () => setTimeout(initFlickity, 200));
+    setInterval(initFlickity, 1500);
+});
+</script>
