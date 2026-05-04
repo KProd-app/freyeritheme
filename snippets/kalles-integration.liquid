@@ -75,9 +75,26 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (options.pageDots === undefined) options.pageDots = true;
                     
                     let flkty = new Flickity(el, options);
-                    el.classList.add('flickityt4s-enabled'); // Add Kalles-specific class
                     
-                    // Trigger resize to fix layout
+                    // Inject Kalles-specific classes so the Kalles grid CSS applies properly
+                    el.classList.add('flickityt4s-enabled'); 
+                    
+                    let viewport = el.querySelector('.flickity-viewport');
+                    if (viewport) viewport.classList.add('flickityt4s-viewport');
+                    
+                    let slider = el.querySelector('.flickity-slider');
+                    if (slider) slider.classList.add('flickityt4s-slider');
+                    
+                    let dots = el.querySelector('.flickity-page-dots');
+                    if (dots) dots.classList.add('flickityt4s-page-dots');
+                    
+                    el.querySelectorAll('.flickity-button').forEach(b => {
+                        b.classList.add('flickityt4s-button');
+                        if (b.classList.contains('previous')) b.classList.add('flickityt4s-prev-next-button');
+                        if (b.classList.contains('next')) b.classList.add('flickityt4s-prev-next-button');
+                    });
+                    
+                    // Trigger resize to fix layout after classes are added
                     setTimeout(() => flkty.resize(), 100);
                 } catch(e) {
                     console.error('Error initializing Flickity for Kalles section:', e);
