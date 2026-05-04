@@ -38,6 +38,11 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <script>
+  window.T4Srequest = {
+    design_mode: {{ request.design_mode | default: false }}
+  };
+  window.$script = function(src, callback) { if(callback) callback(); };
+
   window.T4Sconfigs = {
     theme: 'kalles',
     is_rtl: false,
