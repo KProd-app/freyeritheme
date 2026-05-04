@@ -38,11 +38,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <script>
-  window.T4Srequest = {
-    design_mode: {{ request.design_mode | default: false }}
-  };
-  window.$script = function(src, callback) { if(callback) callback(); };
-
   window.T4Sconfigs = {
     theme: 'kalles',
     is_rtl: false,
@@ -52,19 +47,10 @@ document.addEventListener("DOMContentLoaded", function() {
       time_slider: 5000,
       product_grid_ratio: "1",
       product_grid_crop: "center"
-    },
-    // Saugūs nustatymai, kad Kalles failas nesikėsintų į Freyeri krepšelį ir meniu
-    script1: 'none', script2: 'none', script3: 'none', script5: 'none',
-    script6: 'none', script7: 'none', script8: 'none', script9: 'none',
-    script10: 'none', script11: 'none', script12: 'none', script12a: 'none', script12b: 'none',
-    stylesheet1: 'none', stylesheet2: 'none', stylesheet3: 'none', stylesheet4: 'none',
-    enableAjaxATC: false, enablePredictiveSearch: false, enableAjaxCart: false,
-    cartType: 'disable', wishlist_mode: "0", enable_compare: false
+    }
   };
 </script>
 
-<!-- Pridedame globalų Kalles JS failą visoms funkcijoms -->
-<script src="{{ 'kalles-global.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer="defer"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
